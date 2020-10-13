@@ -7,6 +7,9 @@
 
 #define MS_IN_MIN (1000 * 60)
 
+#define TIME_SYNC_RATE_MS (1000 * 60 * 3)
+#define TZ_OFFSET_S (60 * 60 * 2)
+
 typedef struct Settings
 {
     bool days[NUM_OF_WEEKDAYS];
