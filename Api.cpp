@@ -25,9 +25,7 @@ bool postRequestOk(ESP8266WebServer *server)
 Settings receiveSettings(ESP8266WebServer *server)
 {
     String postBody = server->arg("plain");
-    DEBUG_MSG("# POST body #\n");
-    //    DEBUG_MSG(postBody);
-    DEBUG_MSG("\n");
+//    DEBUG_MSG("# POST body #\n%s\n", postBody);
 
     const size_t CAPACITY = JSON_ARRAY_SIZE(NUM_OF_WEEKDAYS) + JSON_ARRAY_SIZE(NUM_OF_ZONES) + JSON_ARRAY_SIZE(NUM_OF_HH_MIN) + JSON_OBJECT_SIZE(4) + 40;
 
@@ -65,7 +63,6 @@ Settings parseSettings(JsonObject postObj)
 
     for (int i = 0; i < NUM_OF_ZONES; i++)
     {
-
         settings.durations[i] = postObj["durations"][i];
     }
 
