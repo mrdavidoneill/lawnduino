@@ -3,7 +3,9 @@
 
 #include "Secrets.h"
 #include "ZoneManager.h"
+#include "TimeManager.h"
 #include "Router.h"
+#include <WiFiUdp.h>
 
 // Debugger
 #ifdef DEBUG_ESP_PORT
@@ -15,8 +17,12 @@
 int PINS[NUM_OF_ZONES] = {2, 3};
 
 ESP8266WebServer server(80);
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "0.es.pool.ntp.org", TZ_OFFSET_S);
+
 ZoneManager zonemanager;
 Router webrouter;
+TimeManager timemanager;
 
 void setup()
 {
@@ -26,11 +32,13 @@ void setup()
     webrouter = Router(&server, &zonemanager);
     webrouter.begin();
     server.begin();
+    timemanager = TimeManager(&timeClient);
 }
 
 void loop()
 {
     server.handleClient();
+    timemanager.manage();
     zonemanager.manage();
 }
 
