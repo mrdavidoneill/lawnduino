@@ -17,17 +17,21 @@ class TimeManager
     int _msSinceTick;
     int _hours;
     int _mins;
+    int _day;
 
     void syncTime();
     void tick();
-    void incrementMinute();
-    void incrementHour();
-    bool isTime(int hours, int mins);
+    void getTimeFromMillis();
+    bool isTimeValid(int hours, int mins);
+    bool isTimeToSync(int now);
+    bool isTimeToIncrement(int now);
 
 public:
     TimeManager();
     TimeManager(NTPClient *timeClient);
+    bool isTime(int hours, int mins);
     void manage();
+    int getDaysSinceSunday();
 };
 
 #endif
