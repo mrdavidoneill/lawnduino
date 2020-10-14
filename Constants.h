@@ -5,10 +5,14 @@
 #define NUM_OF_ZONES 2
 #define NUM_OF_HH_MIN 2
 
-#define MS_IN_MIN (1000 * 60)
+#define MS_IN_SEC (1000)
+#define MS_IN_MIN (MS_IN_SEC * 60)
 
-#define TIME_SYNC_RATE_MS (1000 * 60 * 3)
-#define TZ_OFFSET_S (60 * 60 * 2)
+#define SEC_IN_MIN (60)
+#define SEC_IN_HOUR (SEC_IN_MIN * 60)
+
+#define TIME_SYNC_RATE_MS (MS_IN_MIN * 3)
+#define TZ_OFFSET_S (SEC_IN_HOUR * 2)
 
 typedef struct Settings
 {
@@ -17,5 +21,12 @@ typedef struct Settings
     short startTime[NUM_OF_HH_MIN];
     bool validated;
 } Settings;
+
+enum WateringMode
+{
+    MODE_OFF,
+    MODE_AUTO,
+    MODE_MANUAL
+};
 
 #endif
