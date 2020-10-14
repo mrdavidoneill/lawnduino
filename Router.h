@@ -16,8 +16,8 @@ class Router
   ZoneManager *_zonemanager;
 
   void handleAuto();
+  void handleManual();
   void handleNext();
-  void handleOff();
   void handleSave();
   void handleStart();
   void handleStop();
