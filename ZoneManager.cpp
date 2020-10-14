@@ -9,7 +9,7 @@
 
 ZoneManager::ZoneManager(){};
 
-ZoneManager::ZoneManager(int pins[NUM_OF_ZONES])
+ZoneManager::ZoneManager(int pins[NUM_OF_ZONES], TimeManager *timeManager)
 {
     DEBUG_MSG("CREATING ZONEMANAGER\n");
 
@@ -18,6 +18,8 @@ ZoneManager::ZoneManager(int pins[NUM_OF_ZONES])
         DEBUG_MSG("Index: %d: \t", i);
         _zones[i] = Zone(pins[i]);
     }
+
+    _timeManager = timeManager;
 }
 
 bool ZoneManager::loadSettings(Settings settings)
@@ -54,6 +56,12 @@ bool ZoneManager::isTasks()
 void ZoneManager::setZoneDuration(int zoneIndex, unsigned long durationMs)
 {
     _zones[zoneIndex].setDurationMs(durationMs);
+}
+
+void ZoneManager::setMode(WateringMode mode)
+{
+    DEBUG_MSG("Mode changed to %d\n", mode);
+    _mode = mode;
 }
 
 void ZoneManager::updateZones()
@@ -115,5 +123,42 @@ void ZoneManager::stopWatering()
 
 void ZoneManager::manage()
 {
+    switch (_mode)
+    {
+    case MODE_MANUAL:
+        manualMode();
+        break;
+    case MODE_AUTO:
+        break;
+        autoMode();
+    }
     updateZones();
 };
+
+void ZoneManager::manualMode()
+{
+    if (isTasks())
+    {
+        stopWatering();
+    }
+}
+
+void ZoneManager::autoMode()
+{
+    if (isTasks())
+    {
+        stopWatering();
+    }
+
+    if (!_wateringDays[_timeManager->getDaysSinceSunday()])
+    {
+        return;
+    }
+
+    if (!_timeManager->isTime(_startTime[0], _startTime[1]))
+    {
+        return;
+    }
+
+    startWatering();
+}
