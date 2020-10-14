@@ -24,9 +24,8 @@ typedef struct Settings
 
 enum WateringMode
 {
-    MODE_OFF,
+    MODE_MANUAL,
     MODE_AUTO,
-    MODE_MANUAL
 };
 
 #endif
