@@ -7,7 +7,9 @@
 #include "Router.h"
 #include "Api.h"
 
+#define AUTO "/auto"
 #define NEXT "/next"
+#define OFF "/off"
 #define SAVE "/save"
 #define START "/start"
 #define STOP "/stop"
@@ -22,10 +24,24 @@ Router::Router(ESP8266WebServer *server, ZoneManager *zonemanager)
 
 void Router::begin()
 {
+    _server->on(AUTO, [=]() { Router::handleAuto(); });
+    _server->on(OFF, [=]() { Router::handleOff(); });
     _server->on(NEXT, [=]() { Router::handleNext(); });
     _server->on(SAVE, [=]() { Router::handleSave(); });
     _server->on(START, [=]() { Router::handleStart(); });
     _server->on(STOP, [=]() { Router::handleStop(); });
+}
+
+void Router::handleAuto()
+{
+    _zonemanager->setMode(MODE_AUTO);
+    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+}
+
+void Router::handleOff()
+{
+    _zonemanager->setMode(MODE_OFF);
+    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
 }
 
 void Router::handleNext()

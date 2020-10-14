@@ -15,7 +15,9 @@ class Router
   ESP8266WebServer *_server;
   ZoneManager *_zonemanager;
 
+  void handleAuto();
   void handleNext();
+  void handleOff();
   void handleSave();
   void handleStart();
   void handleStop();
