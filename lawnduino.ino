@@ -28,11 +28,11 @@ void setup()
 {
     Serial.begin(115200);
     connectWiFi();
-    zonemanager = ZoneManager(PINS);
+    timemanager = TimeManager(&timeClient);
+    zonemanager = ZoneManager(PINS, &timemanager);
     webrouter = Router(&server, &zonemanager);
     webrouter.begin();
     server.begin();
-    timemanager = TimeManager(&timeClient);
 }
 
 void loop()
