@@ -1,33 +1,30 @@
 {
-    "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "C:\\Users\\David\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\libraries\\ESP8266WebServer\\src",
-                "C:\\Program Files (x86)\\Arduino\\tools\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                "C:\\Users\\David\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
-                "C:\\Users\\David\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
-                "${workspaceFolder}/**",
-                "C:\\Users\\David\\Documents\\Arduino\\libraries\\ESP32_Mail_Client\\src\\**",
-                "C:\\Users\\David\\Documents\\Arduino\\libraries\\EMailSender\\**",
-                "C:\\Users\\David\\Documents\\Arduino\\libraries\\**"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.17763.0",
-            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64/cl.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "msvc-x64",
-            "forcedInclude": []
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Win32",
+      "includePath": [
+        "C:\\Users\\David\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\libraries\\ESP8266WebServer\\src",
+        "C:\\Program Files (x86)\\Arduino\\tools\\**",
+        "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\**",
+        "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+        "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
+        "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+        "C:\\Users\\David\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
+        "C:\\Users\\David\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
+        "${workspaceFolder}/**",
+        "C:\\Users\\David\\Documents\\Arduino\\libraries\\ESP32_Mail_Client\\src\\**",
+        "C:\\Users\\David\\Documents\\Arduino\\libraries\\EMailSender\\**",
+        "C:\\Users\\David\\Documents\\Arduino\\libraries\\NTPClient\\**",
+        "C:\\Users\\David\\Documents\\Arduino\\libraries\\**"
+      ],
+      "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+      "windowsSdkVersion": "10.0.17763.0",
+      "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64/cl.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "msvc-x64",
+      "forcedInclude": []
+    }
+  ],
+  "version": 4
 }
