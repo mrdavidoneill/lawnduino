@@ -21,10 +21,11 @@ class ZoneManager
   WateringMode _mode = MODE_AUTO;
 
   void updateZones();
-  bool isTasks();
+  bool isWatering();
   void autoMode();
-  void manualMode();
   void setZoneDuration(int zoneIndex, unsigned long durationMs);
+  unsigned long getZoneDurationMs(int zoneIndex);
+  unsigned long getZoneMsRemaining(int zoneIndex);
 
 public:
   ZoneManager();
@@ -36,6 +37,7 @@ public:
   void stopWatering();
   void nextZone();
   bool loadSettings(Settings settings);
+  Status getStatus();
 };
 
 #endif
