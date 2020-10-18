@@ -6,14 +6,6 @@
 
 #include "Api.h"
 
-// Settings struct
-// {
-// "days": [ true, true, true, true, true, true ],
-// "durations": [ 255, 255, 255, 255, 255, 255 ],
-// "startTime": [0,59]",
-// "error": 0,
-// }
-
 bool postRequestOk(ESP8266WebServer *server)
 {
     if (!server->hasArg("plain"))
@@ -22,14 +14,44 @@ bool postRequestOk(ESP8266WebServer *server)
     }
 }
 
+void sendStatus(ESP8266WebServer *server, Status status)
+{
+    StaticJsonDocument<STATUS_CAPACITY> doc;
+
+    JsonArray days = doc.createNestedArray("days");
+    for (int i = 0; i < NUM_OF_WEEKDAYS; i++)
+    {
+        days.add(status.days[i]);
+    }
+
+    JsonArray durations = doc.createNestedArray("durations");
+    for (int i = 0; i < NUM_OF_ZONES; i++)
+    {
+        durations.add(status.durations[i]);
+    }
+
+    JsonArray startTime = doc.createNestedArray("startTime");
+    for (int i = 0; i < NUM_OF_HH_MIN; i++)
+    {
+        startTime.add(status.startTime[i]);
+    }
+
+    doc["wateringMode"] = status.wateringMode;
+    doc["isWatering"] = status.isWatering;
+    doc["activeZone"] = status.activeZoneIndex;
+    doc["timeRemaining"] = status.timeRemainingMs;
+
+    String buffer;
+    serializeJson(doc, buffer);
+    server->send(200, "text/json", buffer);
+}
+
 Settings receiveSettings(ESP8266WebServer *server)
 {
     String postBody = server->arg("plain");
-//    DEBUG_MSG("# POST body #\n%s\n", postBody);
+    //    DEBUG_MSG("# POST body #\n%s\n", postBody);
 
-    const size_t CAPACITY = JSON_ARRAY_SIZE(NUM_OF_WEEKDAYS) + JSON_ARRAY_SIZE(NUM_OF_ZONES) + JSON_ARRAY_SIZE(NUM_OF_HH_MIN) + JSON_OBJECT_SIZE(4) + 40;
-
-    StaticJsonDocument<CAPACITY> doc;
+    StaticJsonDocument<SETTINGS_CAPACITY> doc;
 
     DeserializationError error = deserializeJson(doc, postBody);
 
@@ -48,6 +70,11 @@ Settings receiveSettings(ESP8266WebServer *server)
 void sendError(ESP8266WebServer *server, String error)
 {
     server->send(400, "text/json", error);
+}
+
+void sendOk(ESP8266WebServer *server)
+{
+    server->send(200, "text/json", "{\"Payload\": \"OK\"}");
 }
 
 Settings parseSettings(JsonObject postObj)
