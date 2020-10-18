@@ -14,6 +14,7 @@ TimeManager::TimeManager(NTPClient *timeClient)
   _mins = 0;
   _day = 0;
   _timeClient = timeClient;
+  _isOnline = true;
   syncTime();
 }
 
@@ -48,13 +49,26 @@ void TimeManager::syncTime()
 
 void TimeManager::manage()
 {
-  int now = millis();
-  if (isTimeToSync(now))
+  if (getIsOnline())
   {
-    _msSinceSync = now;
-    syncTime();
+    int now = millis();
+    if (isTimeToSync(now))
+    {
+      _msSinceSync = now;
+      syncTime();
+    }
   }
   tick();
+}
+
+void TimeManager::setIsOnline(bool isOnline)
+{
+  _isOnline = isOnline;
+}
+
+bool TimeManager::getIsOnline()
+{
+  return _isOnline;
 }
 
 bool TimeManager::isTimeValid(int hours, int mins)
