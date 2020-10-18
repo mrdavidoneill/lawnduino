@@ -20,6 +20,7 @@ class Router
   void handleNext();
   void handleSave();
   void handleStart();
+  void handleStatus();
   void handleStop();
 
 public:

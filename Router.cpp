@@ -12,6 +12,7 @@
 #define MANUAL "/manual"
 #define SAVE "/save"
 #define START "/start"
+#define STATUS "/status"
 #define STOP "/stop"
 
 Router::Router() {}
@@ -29,25 +30,31 @@ void Router::begin()
     _server->on(NEXT, [=]() { Router::handleNext(); });
     _server->on(SAVE, [=]() { Router::handleSave(); });
     _server->on(START, [=]() { Router::handleStart(); });
+    _server->on(STATUS, [=]() { Router::handleStatus(); });
     _server->on(STOP, [=]() { Router::handleStop(); });
 }
 
 void Router::handleAuto()
 {
     _zonemanager->setMode(MODE_AUTO);
-    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+    sendOk(_server);
 }
 
 void Router::handleManual()
 {
     _zonemanager->setMode(MODE_MANUAL);
-    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+    sendOk(_server);
 }
 
 void Router::handleNext()
 {
     _zonemanager->nextZone();
-    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+    sendOk(_server);
+}
+
+void Router::handleStatus()
+{
+    sendStatus(_server, _zonemanager->getStatus());
 }
 
 void Router::handleSave()
@@ -55,7 +62,7 @@ void Router::handleSave()
     if (postRequestOk(_server))
     {
         _zonemanager->loadSettings(receiveSettings(_server));
-        _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+        sendOk(_server);
     }
     else
     {
@@ -66,11 +73,11 @@ void Router::handleSave()
 void Router::handleStart()
 {
     _zonemanager->startWatering();
-    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+    sendOk(_server);
 }
 
 void Router::handleStop()
 {
     _zonemanager->stopWatering();
-    _server->send(200, "text/json", "{\"Payload\": \"OK\"}");
+    sendOk(_server);
 }
