@@ -14,6 +14,12 @@
 #define TIME_SYNC_RATE_MS (MS_IN_MIN * 3)
 #define TZ_OFFSET_S (SEC_IN_HOUR * 2)
 
+enum WateringMode
+{
+    MODE_MANUAL,
+    MODE_AUTO,
+};
+
 typedef struct Settings
 {
     bool days[NUM_OF_WEEKDAYS];
@@ -22,10 +28,15 @@ typedef struct Settings
     bool validated;
 } Settings;
 
-enum WateringMode
+typedef struct Status
 {
-    MODE_MANUAL,
-    MODE_AUTO,
-};
+    bool days[NUM_OF_WEEKDAYS];
+    short durations[NUM_OF_ZONES];
+    short startTime[NUM_OF_HH_MIN];
+    WateringMode wateringMode;
+    bool isWatering;
+    short activeZoneIndex;
+    unsigned long timeRemainingMs;
+} Status;
 
 #endif
