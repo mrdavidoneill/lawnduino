@@ -11,9 +11,9 @@ Zone::Zone(){};
 Zone::Zone(int pin)
 {
     DEBUG_MSG("Creating Zone with pin %d ", pin);
-    
     _pin = pin;
     _durationMs = 10 * 60 * 1000;
+    _endTimestamp = 0;
     _isOn = false;
 
     DEBUG_MSG("and duration %d mins...", _durationMs / 60 / 1000);
@@ -24,6 +24,7 @@ Zone::Zone(int pin)
 int Zone::getPin() { return _pin; };
 
 unsigned long Zone::getDurationMs() { return _durationMs; };
+unsigned long Zone::getRemainingMs() { return _endTimestamp > millis() ? _endTimestamp - millis() : 0; };
 
 void Zone::setDurationMs(unsigned long durationMs) { _durationMs = durationMs; };
 

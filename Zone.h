@@ -26,6 +26,7 @@ public:
   int getPin();
   bool getIsOn();
   unsigned long getDurationMs();
+  unsigned long getRemainingMs();
 
   bool isFinished();
 
