@@ -27,6 +27,8 @@ TimeManager timemanager;
 void setup()
 {
     Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
+    WiFi.hostname("LawnManager");
     connectWiFi();
     timemanager = TimeManager(&timeClient);
     zonemanager = ZoneManager(PINS, &timemanager);
