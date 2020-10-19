@@ -23,7 +23,7 @@ enum WateringMode
 typedef struct Settings
 {
     bool days[NUM_OF_WEEKDAYS];
-    short durations[NUM_OF_ZONES];
+    unsigned long durations[NUM_OF_ZONES];
     short startTime[NUM_OF_HH_MIN];
     bool validated;
 } Settings;
@@ -31,7 +31,7 @@ typedef struct Settings
 typedef struct Status
 {
     bool days[NUM_OF_WEEKDAYS];
-    short durations[NUM_OF_ZONES];
+    unsigned long durations[NUM_OF_ZONES];
     short startTime[NUM_OF_HH_MIN];
     WateringMode wateringMode;
     bool isWatering;
