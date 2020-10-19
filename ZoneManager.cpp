@@ -33,7 +33,7 @@ bool ZoneManager::loadSettings(Settings settings)
 
         for (int i = 0; i < NUM_OF_ZONES; i++)
         {
-            setZoneDuration(i, settings.durations[i] * MS_IN_MIN);
+            setZoneDuration(i, settings.durations[i]);
         }
 
         for (int i = 0; i < NUM_OF_HH_MIN; i++)
@@ -67,7 +67,7 @@ Status ZoneManager::getStatus()
     status.wateringMode = _mode;
     status.isWatering = isWatering();
     status.activeZoneIndex = _currentZoneIndex;
-    status.timeRemainingMs = getZoneMsRemaining(_currentZoneIndex);
+    status.timeRemainingMs = (_currentZoneIndex > -1) ? getZoneMsRemaining(_currentZoneIndex) : 0;
 
     return status;
 }
