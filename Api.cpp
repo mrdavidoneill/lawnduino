@@ -62,6 +62,10 @@ Settings receiveSettings(ESP8266WebServer *server)
         DEBUG_MSG("Error parsing JSON: %s\n", error.c_str());
         postObj["error"] = JsonParse;
     }
+    else
+    {
+      postObj["error"] = 0;
+    }
 
     DEBUG_MSG("Parsing data\n");
     return parseSettings(postObj);
