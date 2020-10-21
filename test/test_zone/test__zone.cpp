@@ -57,11 +57,8 @@ void testIsFinished(void)
 
 void setup()
 {
-    // NOTE!!! Wait for >2 secs
-    // if board doesn't support software reset via Serial.DTR/RTS
-    delay(2000);
+    UNITY_BEGIN();
 
-    UNITY_BEGIN(); // IMPORTANT LINE!
     RUN_TEST(testPinNumber);
     RUN_TEST(testIsOn);
     RUN_TEST(testDurationMs);
