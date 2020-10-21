@@ -1,1 +1,9 @@
+### Secrets ###
 Secrets.h
+
+### PlatformIO ###
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
+.pio

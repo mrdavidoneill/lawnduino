@@ -1,17 +1,8 @@
-#ifdef DEBUG_ESP_PORT
-#define DEBUG_MSG(...) DEBUG_ESP_PORT.printf(__VA_ARGS__)
-#else
-#define DEBUG_MSG(...)
-#endif
-
 #include "Api.h"
 
 bool postRequestOk(ESP8266WebServer *server)
 {
-    if (!server->hasArg("plain"))
-    {
-        return false;
-    }
+    return server->hasArg("plain");
 }
 
 void sendStatus(ESP8266WebServer *server, Status status)
@@ -64,7 +55,7 @@ Settings receiveSettings(ESP8266WebServer *server)
     }
     else
     {
-      postObj["error"] = 0;
+        postObj["error"] = 0;
     }
 
     DEBUG_MSG("Parsing data\n");

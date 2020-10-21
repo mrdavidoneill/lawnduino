@@ -1,6 +1,6 @@
 /*
   Router.h - Library for setting up web routes.
-  Created by David A. O'Neill, October 13, 2010.
+  Created by David A. O'Neill, October 13, 2020.
   Released into the public domain.
 */
 
@@ -8,7 +8,8 @@
 #define Router_h
 
 #include <ESP8266WebServer.h>
-#include "ZoneManager.h"
+#include "ZoneManager/ZoneManager.h"
+#include "Api/Api.h"
 
 class Router
 {

@@ -5,7 +5,6 @@
 #endif
 
 #include "Router.h"
-#include "Api.h"
 
 #define AUTO "/auto"
 #define NEXT "/next"

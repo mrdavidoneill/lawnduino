@@ -1,15 +1,15 @@
 /*
   ZoneManager.h - Library for managing watering zones.
-  Created by David A. O'Neill, October 10, 2010.
+  Created by David A. O'Neill, October 10, 2020.
   Released into the public domain.
 */
 
 #ifndef ZoneManager_h
 #define ZoneManager_h
 
-#include "Constants.h"
-#include "TimeManager.h"
-#include "Zone.h"
+#include "Config.h"
+#include "TimeManager/TimeManager.h"
+#include <Zone.h>
 
 class ZoneManager
 {

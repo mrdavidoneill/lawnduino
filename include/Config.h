@@ -1,6 +1,12 @@
 #ifndef Constants_h
 #define Constants_h
 
+#ifdef DEBUG_ESP_PORT
+#define DEBUG_MSG(...) DEBUG_ESP_PORT.printf(__VA_ARGS__)
+#else
+#define DEBUG_MSG(...)
+#endif
+
 #define NUM_OF_WEEKDAYS 7
 #define NUM_OF_ZONES 2
 #define NUM_OF_HH_MIN 2

@@ -1,0 +1,42 @@
+Rain adjust
+
+last_3_hrs = [3]
+last_3_days = [8*3]
+
+
+Have a 24 element array
+Every 1 hour, check weather
+Remove first item.
+Add rain["1hr"] to last element in array
+
+
+last_3_hrs = [-1,-1,-1]
+
+for index, item in last_3_hrs:
+    if item = -1: add new item in index
+        05:00:  last_3_hrs = [0, -1, -1]
+        06:00:  last_3_hrs = [5, 13, -1]
+        07:00:  last_3_hrs = [5, 13, 21]
+    else add 2hr sum to last_3_days and add item to first slot, then reset rest of array to -1.
+        08:00:  last_3_days = [....., rain["3hr"]]
+        08:00:  last_3_hrs = [19, -1, -1]
+
+Every hour, sum the weeks rain, and adjust "rain adjust" %
+
+eg. if > 50mm rain, rain adjust = 0%.
+if < 5mm rain, adjust = 90%.
+if 25mm, rain adjust = 50%
+
+so (weekly target - rainfall) ÷ weekly target * 100%
+eg.
+(50 - 0) ÷ 50 * 100% = 100%
+(50 - 5) ÷ 50 = 0.5 = 90%
+(50 - 25) ÷ 50 = 0.5 = 50%
+
+Seasonal adjust %
+Every week, adjust to week % chart.  eg. July 100%.  Feb, 10%.
+Check temp foreacast.
+
+Frost stop
+Every time about to start, check temp, if under 2 degrees, set frost block.
+

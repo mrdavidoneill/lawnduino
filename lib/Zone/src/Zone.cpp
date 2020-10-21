@@ -54,7 +54,6 @@ void Zone::turnOn()
 void Zone::turnOff()
 {
     DEBUG_MSG("Turning off pin %d", _pin);
-    setStartTimestamp(NULL);
     digitalWrite(_pin, LOW);
     _isOn = false;
     DEBUG_MSG("...OK\n");

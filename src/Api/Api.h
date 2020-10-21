@@ -1,6 +1,6 @@
 /*
   Api.h - Library for a REST API.
-  Created by David A. O'Neill, October 12, 2010.
+  Created by David A. O'Neill, October 12, 2020.
   Released into the public domain.
 */
 #ifndef Api_h
@@ -8,7 +8,7 @@
 
 #include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
-#include "Constants.h"
+#include "Config.h"
 #include "Errors.h"
 
 const size_t STATUS_CAPACITY = JSON_ARRAY_SIZE(2) + 2 * JSON_ARRAY_SIZE(6) + JSON_OBJECT_SIZE(7);

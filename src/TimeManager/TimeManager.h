@@ -1,6 +1,6 @@
 /*
   TimeManager.h - Library for managing time.
-  Created by David A. O'Neill, October 13, 2010.
+  Created by David A. O'Neill, October 13, 2020.
   Released into the public domain.
 */
 
@@ -8,7 +8,7 @@
 #define TimeManager_h
 
 #include <NTPClient.h>
-#include "Constants.h"
+#include "Config.h"
 
 class TimeManager
 {

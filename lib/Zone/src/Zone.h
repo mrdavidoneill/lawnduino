@@ -1,10 +1,11 @@
 /*
   Zone.h - Library for controlling lawn watering zones.
-  Created by David A. O'Neill, October 10, 2010.
+  Created by David A. O'Neill, October 10, 2020.
   Released into the public domain.
 */
 #ifndef Zone_h
 #define Zone_h
+
 #include <Arduino.h>
 
 class Zone
@@ -15,11 +16,11 @@ private:
   void setStartTimestamp(unsigned long startTimestamp);
   void setEndTimestamp();
   bool _isOn;
-
-public:
   unsigned long _durationMs;
   unsigned long _endTimestamp;
   unsigned long _startTimestamp;
+
+public:
   Zone();
   Zone(int pin);
 
