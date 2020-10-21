@@ -11,7 +11,7 @@ ZoneManager::ZoneManager(){};
 
 ZoneManager::ZoneManager(int pins[NUM_OF_ZONES], TimeManager *timeManager)
 {
-    DEBUG_MSG("CREATING ZONEMANAGER\n");
+    DEBUG_MSG("Creating ZoneManager\n");
 
     for (int i = 0; i < NUM_OF_ZONES; i++)
     {
@@ -24,18 +24,22 @@ ZoneManager::ZoneManager(int pins[NUM_OF_ZONES], TimeManager *timeManager)
 
 bool ZoneManager::loadSettings(Settings settings)
 {
+    DEBUG_MSG("Loading settings\n");
     if (settings.validated)
     {
         for (int i = 0; i < NUM_OF_WEEKDAYS; i++)
         {
+            DEBUG_MSG("Day %d: Watering? %d\n", i, settings.days[i]);
             _wateringDays[i] = settings.days[i];
         }
 
         for (int i = 0; i < NUM_OF_ZONES; i++)
         {
+            DEBUG_MSG("Zone %d: Duration: %d mins\n", i, settings.durations[i] / MS_IN_MIN);
             setZoneDuration(i, settings.durations[i]);
         }
 
+        DEBUG_MSG("Start time %d:%d\n", settings.startTime[0], settings.startTime[1]);
         for (int i = 0; i < NUM_OF_HH_MIN; i++)
         {
             _startTime[i] = settings.startTime[i];
