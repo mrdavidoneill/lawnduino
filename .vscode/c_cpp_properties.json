@@ -6,6 +6,7 @@
         {
             "name": "Win32",
             "includePath": [
+                "c:/Users/David/Documents/PROGRAMMING/lawnduino/lib/Zone/src",
                 "c:/Users/David/Documents/PROGRAMMING/lawnduino/.pio/libdeps/nodemcuv2/ArduinoJson/src",
                 "c:/Users/David/Documents/PROGRAMMING/lawnduino/.pio/libdeps/nodemcuv2/NTPClient",
                 "C:/Users/David/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src",
@@ -50,6 +51,7 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
+                    "c:/Users/David/Documents/PROGRAMMING/lawnduino/lib/Zone/src",
                     "c:/Users/David/Documents/PROGRAMMING/lawnduino/.pio/libdeps/nodemcuv2/ArduinoJson/src",
                     "c:/Users/David/Documents/PROGRAMMING/lawnduino/.pio/libdeps/nodemcuv2/NTPClient",
                     "C:/Users/David/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src",
@@ -97,6 +99,7 @@
                 "ESP8266",
                 "ARDUINO_ARCH_ESP8266",
                 "ARDUINO_ESP8266_NODEMCU",
+                "DEBUG_ESP_PORT=Serial",
                 "F_CPU=80000000L",
                 "__ets__",
                 "ICACHE_FLASH",
