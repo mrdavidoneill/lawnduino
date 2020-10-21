@@ -33,8 +33,8 @@ void testDurationMs(void)
     const unsigned long DURATION = 10000;
     zone.setDurationMs(DURATION);
     TEST_ASSERT_EQUAL(DURATION, zone.getDurationMs());
-    zone.setDurationMs(DURATION + DURATION);
-    TEST_ASSERT_EQUAL(DURATION + DURATION, zone.getDurationMs());
+    zone.setDurationMs(DURATION + 1);
+    TEST_ASSERT_EQUAL(DURATION + 1, zone.getDurationMs());
 }
 
 void testRemainingMs(void)
@@ -51,7 +51,7 @@ void testIsFinished(void)
     zone.setDurationMs(DURATION);
     zone.turnOn();
     TEST_ASSERT_EQUAL(false, zone.isFinished());
-    delay(DURATION + DURATION);
+    delay(DURATION + 1);
     TEST_ASSERT_EQUAL(true, zone.isFinished());
 }
 
