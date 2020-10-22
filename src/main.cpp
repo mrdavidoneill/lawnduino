@@ -2,12 +2,15 @@
 
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 
 #include "Secrets.h"
 #include "ZoneManager/ZoneManager.h"
 #include "TimeManager/TimeManager.h"
 #include "Router/Router.h"
 #include <WiFiUdp.h>
+
+#include <RainAdjust.h>
 
 // Debugger
 #ifdef DEBUG_ESP_PORT
@@ -22,9 +25,14 @@ ESP8266WebServer server(80);
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "0.es.pool.ntp.org", TZ_OFFSET_S);
 
+WiFiClient client;
+HTTPClient http;
+
 ZoneManager zonemanager;
 Router webrouter;
 TimeManager timemanager;
+
+RainAdjust rainAdjust;
 
 boolean isConnected();
 void connectWiFi();
@@ -36,6 +44,7 @@ void setup()
   WiFi.mode(WIFI_STA);
   WiFi.hostname("LawnManager");
   connectWiFi();
+  rainAdjust = RainAdjust(&client, &http);
   timemanager = TimeManager(&timeClient);
   zonemanager = ZoneManager(PINS, &timemanager);
   webrouter = Router(&server, &zonemanager);
@@ -48,6 +57,7 @@ void loop()
   server.handleClient();
   timemanager.manage();
   zonemanager.manage();
+  rainAdjust.manage();
 }
 
 boolean isConnected()
