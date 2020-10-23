@@ -11,6 +11,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 #include "Secrets.h"
+#include <ZoneManager.h>
 
 #define DEFAULT_TARGET 50
 
@@ -27,10 +28,10 @@ class RainAdjust
 {
 public:
     RainAdjust();
-    RainAdjust(WiFiClient *client, HTTPClient *http);
+    RainAdjust(WiFiClient *client, HTTPClient *http, ZoneManager *zoneManager);
     RainAdjust(float hourlyLog[HOURLY_LOG_LENGTH], float weekLog[WEEK_LOG_LENGTH]);
-    unsigned int getRainAdjust();
-    unsigned int getSunlightAdjust();
+    float getRainAdjust();
+    float getSunlightAdjust();
     void manage();
     float sumHourlyLog();
     float sumWeekLog();
@@ -38,6 +39,7 @@ public:
 private:
     WiFiClient *_client;
     HTTPClient *_http;
+    ZoneManager *_zoneManager;
 
     float _hourlyLog[HOURLY_LOG_LENGTH];
     float _weekLog[WEEK_LOG_LENGTH];
@@ -58,7 +60,7 @@ private:
     bool timeToFetch();
 
     void logRainFall();
-
+    void updateZoneManager();
     void setDaylightSec(long daylightSec);
 };
 

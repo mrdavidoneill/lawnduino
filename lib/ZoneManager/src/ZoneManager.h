@@ -7,8 +7,8 @@
 #ifndef ZoneManager_h
 #define ZoneManager_h
 
-#include "Config.h"
-#include "TimeManager/TimeManager.h"
+#include <Config.h>
+#include <TimeManager.h>
 #include <Zone.h>
 
 class ZoneManager
@@ -19,6 +19,7 @@ class ZoneManager
   int _startTime[NUM_OF_HH_MIN] = {11, 49};
   bool _wateringDays[NUM_OF_WEEKDAYS] = {1, 1, 1, 1, 1, 1, 1};
   WateringMode _mode = MODE_AUTO;
+  float _weatherAdjustRate = 1.0;
 
   void updateZones();
   bool isWatering();
@@ -38,6 +39,8 @@ public:
   void nextZone();
   bool loadSettings(Settings settings);
   Status getStatus();
+  float getWeatherAdjustRate();
+  void setWeatherAdjustRate(float weatherAdjustRate);
 };
 
 #endif

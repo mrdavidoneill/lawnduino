@@ -8,10 +8,11 @@
 
 RainAdjust::RainAdjust() {}
 
-RainAdjust::RainAdjust(WiFiClient *client, HTTPClient *http)
+RainAdjust::RainAdjust(WiFiClient *client, HTTPClient *http, ZoneManager *zoneManager)
 {
     _client = client;
     _http = http;
+    _zoneManager = zoneManager;
     DEBUG_MSG("Creating RainAdjust\n");
     resetHourlyLog();
     resetWeekLog();
@@ -106,13 +107,6 @@ void RainAdjust::shiftWeekLog()
     }
 }
 
-unsigned int RainAdjust::getRainAdjust()
-{
-    unsigned int rainFall = sumWeekLog();
-    unsigned int adjust = (_targetLevel - rainFall) / _targetLevel;
-    return adjust <= 1 ? adjust : 0;
-}
-
 void RainAdjust::logRainFall()
 {
     DEBUG_MSG("Logging rainFall\n");
@@ -184,6 +178,7 @@ void RainAdjust::parseWeather()
     long daylightSec = sys_sunset - sys_sunrise;
     setDaylightSec(daylightSec);
     addToHourlyLog(rain_1h);
+    updateZoneManager();
     DEBUG_MSG("Rain 1h: %f\n", rain_1h);
     DEBUG_MSG("Temp: %f\n", main_temp);
     DEBUG_MSG("DaylightSec: %f hrs\n", (float)daylightSec / 60 / 60);
@@ -194,12 +189,33 @@ void RainAdjust::setDaylightSec(long daylightSec)
     _daylightSec = daylightSec;
 }
 
-unsigned int RainAdjust::getSunlightAdjust()
+void RainAdjust::updateZoneManager()
+{
+    _zoneManager->setWeatherAdjustRate(getRainAdjust() * getSunlightAdjust());
+}
+
+float RainAdjust::getSunlightAdjust()
 {
     // If weather not fetched from server
     if (_daylightSec == -1)
     {
         return 1;
     }
-    return (_daylightSec - MIN_SUNLIGHT_SEC) / (MAX_SUNLIGHT_SEC - MIN_SUNLIGHT_SEC);
+
+    float adjust = (float)(_daylightSec - MIN_SUNLIGHT_SEC) / (float)(MAX_SUNLIGHT_SEC - MIN_SUNLIGHT_SEC);
+
+    adjust = adjust > 1 ? 1 : adjust;
+    adjust = adjust < 0 ? 0 : adjust;
+
+    DEBUG_MSG("Daylight adjust: %f\n", adjust);
+    return adjust;
+}
+
+float RainAdjust::getRainAdjust()
+{
+    unsigned int rainFall = sumWeekLog();
+    float adjust = (_targetLevel - rainFall) / _targetLevel;
+
+    DEBUG_MSG("Rain adjust: %f\n", adjust);
+    return adjust <= 1 ? adjust : 0;
 }

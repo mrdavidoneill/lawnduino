@@ -31,6 +31,7 @@ void sendStatus(ESP8266WebServer *server, Status status)
     doc["isWatering"] = status.isWatering;
     doc["activeZone"] = status.activeZoneIndex;
     doc["timeRemaining"] = status.timeRemainingMs;
+    doc["weatherAdjustRate"] = status.weatherAdjustRate;
 
     String buffer;
     serializeJson(doc, buffer);

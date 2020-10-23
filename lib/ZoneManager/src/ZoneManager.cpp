@@ -72,6 +72,7 @@ Status ZoneManager::getStatus()
     status.isWatering = isWatering();
     status.activeZoneIndex = _currentZoneIndex;
     status.timeRemainingMs = (_currentZoneIndex > -1) ? getZoneMsRemaining(_currentZoneIndex) : 0;
+    status.weatherAdjustRate = _weatherAdjustRate;
 
     return status;
 }
@@ -197,4 +198,14 @@ void ZoneManager::autoMode()
     }
 
     startWatering();
+}
+
+void ZoneManager::setWeatherAdjustRate(float weatherAdjustRate)
+{
+    _weatherAdjustRate = weatherAdjustRate;
+}
+
+float ZoneManager::getWeatherAdjustRate()
+{
+    return _weatherAdjustRate;
 }

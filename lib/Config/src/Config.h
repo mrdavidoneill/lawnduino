@@ -43,6 +43,7 @@ typedef struct Status
     bool isWatering;
     short activeZoneIndex;
     unsigned long timeRemainingMs;
+    float weatherAdjustRate;
 } Status;
 
 #endif

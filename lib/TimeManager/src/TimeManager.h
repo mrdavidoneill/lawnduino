@@ -8,7 +8,7 @@
 #define TimeManager_h
 
 #include <NTPClient.h>
-#include "Config.h"
+#include <Config.h>
 
 class TimeManager
 {

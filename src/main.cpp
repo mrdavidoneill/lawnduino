@@ -5,8 +5,8 @@
 #include <ESP8266HTTPClient.h>
 
 #include "Secrets.h"
-#include "ZoneManager/ZoneManager.h"
-#include "TimeManager/TimeManager.h"
+#include <ZoneManager.h>
+#include <TimeManager.h>
 #include "Router/Router.h"
 #include <WiFiUdp.h>
 
@@ -44,9 +44,9 @@ void setup()
   WiFi.mode(WIFI_STA);
   WiFi.hostname("LawnManager");
   connectWiFi();
-  rainAdjust = RainAdjust(&client, &http);
   timemanager = TimeManager(&timeClient);
   zonemanager = ZoneManager(PINS, &timemanager);
+  rainAdjust = RainAdjust(&client, &http, &zonemanager);
   webrouter = Router(&server, &zonemanager);
   webrouter.begin();
   server.begin();
