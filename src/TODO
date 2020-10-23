@@ -1,6 +1,4 @@
 Add method in ZoneManager to use:
-    Rain Adjust 
-    Daylight Adjust
     Manual Adjust
 Add API endpoint to adjust manual adjust %
 Add other programs
