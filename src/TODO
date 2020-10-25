@@ -7,3 +7,33 @@ Add other programs
     Trees program (50-100% seasonal)
     Flowerbed program (70-100% seasonal)
     Seedlings program (100-100% seasonal, twice daily)
+Add offline file
+	.json
+		easier to store same as API call structure
+	use littleFS
+	Everytime setting is changed via API call, the offline is also changed
+	On restart, the offline file is called to get settings
+
+Change settings to store settings for more than one LawnManager
+Create ProgramManager
+	controls multiple zonemanagers
+	Change zonemanager to not start watering, but to instead change state to "shouldStart"
+	The programManager iterates through zonemanagers, and starts one when it shouldStart.
+		It will then complete and have isStarted() as false"
+		If another zoneManager also has "shouldStart" nothing happens if isWatering()
+			so it waits for the other one to finish
+
+class ZoneManager(int pins[]) {
+public:
+	shouldFinish()
+	shouldStart()
+	startWatering()
+	stopWatering()
+}
+
+class ProgramManager
+	bool _isWatering;
+
+
+
+
