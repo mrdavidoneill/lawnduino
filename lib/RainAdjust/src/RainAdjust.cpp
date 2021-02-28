@@ -8,11 +8,11 @@
 
 RainAdjust::RainAdjust() {}
 
-RainAdjust::RainAdjust(WiFiClient *client, HTTPClient *http, ZoneManager *zoneManager)
+RainAdjust::RainAdjust(WiFiClient *client, HTTPClient *http, ProgramManager *programManager)
 {
     _client = client;
     _http = http;
-    _zoneManager = zoneManager;
+    _programManager = programManager;
     DEBUG_MSG("Creating RainAdjust\n");
     resetHourlyLog();
     resetWeekLog();
@@ -178,7 +178,7 @@ void RainAdjust::parseWeather()
     long daylightSec = sys_sunset - sys_sunrise;
     setDaylightSec(daylightSec);
     addToHourlyLog(rain_1h);
-    updateZoneManager();
+    updateProgramManager();
     DEBUG_MSG("Rain 1h: %f\n", rain_1h);
     DEBUG_MSG("Temp: %f\n", main_temp);
     DEBUG_MSG("DaylightSec: %f hrs\n", (float)daylightSec / 60 / 60);
@@ -189,9 +189,9 @@ void RainAdjust::setDaylightSec(long daylightSec)
     _daylightSec = daylightSec;
 }
 
-void RainAdjust::updateZoneManager()
+void RainAdjust::updateProgramManager()
 {
-    _zoneManager->setWeatherAdjustRate(getRainAdjust() * getSunlightAdjust());
+    _programManager->setWeatherAdjustRate(getRainAdjust() * getSunlightAdjust());
 }
 
 float RainAdjust::getSunlightAdjust()

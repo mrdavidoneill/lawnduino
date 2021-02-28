@@ -10,8 +10,8 @@
 // #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
+#include <ProgramManager.h>
 #include "Secrets.h"
-#include <ZoneManager.h>
 
 #define DEFAULT_TARGET 50
 
@@ -27,41 +27,41 @@
 class RainAdjust
 {
 public:
-    RainAdjust();
-    RainAdjust(WiFiClient *client, HTTPClient *http, ZoneManager *zoneManager);
-    RainAdjust(float hourlyLog[HOURLY_LOG_LENGTH], float weekLog[WEEK_LOG_LENGTH]);
-    float getRainAdjust();
-    float getSunlightAdjust();
-    void manage();
-    float sumHourlyLog();
-    float sumWeekLog();
+  RainAdjust();
+  RainAdjust(WiFiClient *client, HTTPClient *http, ProgramManager *programManager);
+  RainAdjust(float hourlyLog[HOURLY_LOG_LENGTH], float weekLog[WEEK_LOG_LENGTH]);
+  float getRainAdjust();
+  float getSunlightAdjust();
+  void manage();
+  float sumHourlyLog();
+  float sumWeekLog();
 
 private:
-    WiFiClient *_client;
-    HTTPClient *_http;
-    ZoneManager *_zoneManager;
+  WiFiClient *_client;
+  HTTPClient *_http;
+  ProgramManager *_programManager;
 
-    float _hourlyLog[HOURLY_LOG_LENGTH];
-    float _weekLog[WEEK_LOG_LENGTH];
-    unsigned int _targetLevel = DEFAULT_TARGET;
-    unsigned long _lastLog = 0;
-    unsigned long _timeOut = 0;
-    unsigned long _updateRate = UPDATE_RATE;
-    long _daylightSec = -1;
+  float _hourlyLog[HOURLY_LOG_LENGTH];
+  float _weekLog[WEEK_LOG_LENGTH];
+  unsigned int _targetLevel = DEFAULT_TARGET;
+  unsigned long _lastLog = 0;
+  unsigned long _timeOut = 0;
+  unsigned long _updateRate = UPDATE_RATE;
+  long _daylightSec = -1;
 
-    void resetHourlyLog();
-    void resetWeekLog();
-    void addToHourlyLog(int mm);
-    void addToWeekLog(unsigned int mm);
-    void shiftWeekLog();
+  void resetHourlyLog();
+  void resetWeekLog();
+  void addToHourlyLog(int mm);
+  void addToWeekLog(unsigned int mm);
+  void shiftWeekLog();
 
-    bool fetchWeather();
-    void parseWeather();
-    bool timeToFetch();
+  bool fetchWeather();
+  void parseWeather();
+  bool timeToFetch();
 
-    void logRainFall();
-    void updateZoneManager();
-    void setDaylightSec(long daylightSec);
+  void logRainFall();
+  void updateProgramManager();
+  void setDaylightSec(long daylightSec);
 };
 
 #endif
