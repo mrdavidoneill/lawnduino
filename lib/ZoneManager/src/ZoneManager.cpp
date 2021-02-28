@@ -84,7 +84,7 @@ bool ZoneManager::isWatering()
 
 void ZoneManager::setZoneDuration(int zoneIndex, unsigned long durationMs)
 {
-    _zones[zoneIndex].setDurationMs(durationMs);
+    _zones[zoneIndex].setDurationMs(durationMs * getWeatherAdjustRate());
 }
 
 unsigned long ZoneManager::getZoneDurationMs(int zoneIndex)
@@ -154,6 +154,7 @@ void ZoneManager::startWatering()
 {
     DEBUG_MSG("STARTING WATERING...\n");
     _currentZoneIndex = 0;
+    setShouldStartWatering(false);
 
     // Don't sync if watering - Danger of bad server sync
     _timeManager->setIsOnline(false);
@@ -197,7 +198,18 @@ void ZoneManager::autoMode()
         return;
     }
 
-    startWatering();
+    setShouldStartWatering(true);
+}
+
+void ZoneManager::setShouldStartWatering(bool shouldStartWatering)
+{
+    DEBUG_MSG("Zones should start watering: %s\n", shouldStartWatering ? "True" : "False");
+    _shouldStartWatering = shouldStartWatering;
+}
+
+bool ZoneManager::shouldStartWatering()
+{
+    return _shouldStartWatering;
 }
 
 void ZoneManager::setWeatherAdjustRate(float weatherAdjustRate)

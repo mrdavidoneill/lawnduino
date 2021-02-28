@@ -20,9 +20,9 @@ class ZoneManager
   bool _wateringDays[NUM_OF_WEEKDAYS] = {1, 1, 1, 1, 1, 1, 1};
   WateringMode _mode = MODE_AUTO;
   float _weatherAdjustRate = 1.0;
+  bool _shouldStartWatering = false;
 
   void updateZones();
-  bool isWatering();
   void autoMode();
   void setZoneDuration(int zoneIndex, unsigned long durationMs);
   unsigned long getZoneDurationMs(int zoneIndex);
@@ -38,9 +38,12 @@ public:
   void stopWatering();
   void nextZone();
   bool loadSettings(Settings settings);
+  bool isWatering();
   Status getStatus();
   float getWeatherAdjustRate();
   void setWeatherAdjustRate(float weatherAdjustRate);
+  void setShouldStartWatering(bool shouldStartWatering);
+  bool shouldStartWatering();
 };
 
 #endif
