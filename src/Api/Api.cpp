@@ -41,9 +41,10 @@ void sendStatus(ESP8266WebServer *server, Status status)
 Settings receiveSettings(ESP8266WebServer *server)
 {
     String postBody = server->arg("plain");
-    //    DEBUG_MSG("# POST body #\n%s\n", postBody);
+    DEBUG_MSG("POST body:\n\t%s\n", postBody.c_str());
 
     StaticJsonDocument<SETTINGS_CAPACITY> doc;
+    DEBUG_MSG("StaticJsonDocument capacity created: %d\n", doc.capacity());
 
     DeserializationError error = deserializeJson(doc, postBody);
 
@@ -77,7 +78,8 @@ Settings parseSettings(JsonObject postObj)
 {
     Settings settings;
 
-    settings.validated = postObj["error"] == 0 ? true : false;
+    settings.validated = postObj["error"] ? false : true;
+    DEBUG_MSG("settings.validated = %s\n", postObj["error"] ? "false" : "true");
 
     for (int i = 0; i < NUM_OF_WEEKDAYS; i++)
     {
@@ -93,6 +95,5 @@ Settings parseSettings(JsonObject postObj)
     {
         settings.startTime[i] = postObj["startTime"][i];
     }
-
     return settings;
 }
