@@ -5,7 +5,7 @@
 #include <ESP8266HTTPClient.h>
 
 #include "Secrets.h"
-#include <ZoneManager.h>
+#include <ProgramManager.h>
 #include <TimeManager.h>
 #include "Router/Router.h"
 #include <WiFiUdp.h>
@@ -28,7 +28,7 @@ NTPClient timeClient(ntpUDP, "0.es.pool.ntp.org", TZ_OFFSET_S);
 WiFiClient client;
 HTTPClient http;
 
-ZoneManager zonemanager;
+ProgramManager programmanager;
 Router webrouter;
 TimeManager timemanager;
 
@@ -45,9 +45,9 @@ void setup()
   WiFi.hostname("LawnManager");
   connectWiFi();
   timemanager = TimeManager(&timeClient);
-  zonemanager = ZoneManager(PINS, &timemanager);
-  rainAdjust = RainAdjust(&client, &http, &zonemanager);
-  webrouter = Router(&server, &zonemanager);
+  programmanager = ProgramManager(PINS, &timemanager);
+  rainAdjust = RainAdjust(&client, &http, &programmanager);
+  webrouter = Router(&server, &programmanager);
   webrouter.begin();
   server.begin();
 }
@@ -56,7 +56,7 @@ void loop()
 {
   server.handleClient();
   timemanager.manage();
-  zonemanager.manage();
+  programmanager.manage();
   rainAdjust.manage();
 }
 
