@@ -8,14 +8,16 @@
 #define Router_h
 
 #include <ESP8266WebServer.h>
-#include <ZoneManager.h>
+#include <ProgramManager.h>
 #include "Api/Api.h"
 
 class Router
 {
   ESP8266WebServer *_server;
-  ZoneManager *_zonemanager;
+  ProgramManager *_programManager;
 
+  bool isProgramNumValid();
+  int getProgram();
   void handleAuto();
   void handleManual();
   void handleNext();
@@ -26,7 +28,7 @@ class Router
 
 public:
   Router();
-  Router(ESP8266WebServer *server, ZoneManager *zonemanager);
+  Router(ESP8266WebServer *server, ProgramManager *programManager);
   void begin();
 };
 

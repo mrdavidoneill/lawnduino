@@ -16,11 +16,34 @@
 
 Router::Router() {}
 
-Router::Router(ESP8266WebServer *server, ZoneManager *zonemanager)
+Router::Router(ESP8266WebServer *server, ProgramManager *programManager)
 {
     _server = server;
-    _zonemanager = zonemanager;
+    _programManager = programManager;
 };
+
+bool Router::isProgramNumValid()
+{
+    return getProgram() > -1;
+}
+
+int Router::getProgram()
+{
+    int program;
+    if (!_server->hasArg("program"))
+    {
+        program = 0;
+    }
+    else
+    {
+        program = _server->arg("program").toInt();
+    }
+    if (0 > program && program > NUM_OF_PROGRAMS - 1)
+    {
+        program = -1; // Bad program
+    }
+    return program;
+}
 
 void Router::begin()
 {
@@ -35,33 +58,50 @@ void Router::begin()
 
 void Router::handleAuto()
 {
-    _zonemanager->setMode(MODE_AUTO);
+    _programManager->setMode(MODE_AUTO);
     sendOk(_server);
 }
 
 void Router::handleManual()
 {
-    _zonemanager->setMode(MODE_MANUAL);
+    _programManager->setMode(MODE_MANUAL);
     sendOk(_server);
 }
 
 void Router::handleNext()
 {
-    _zonemanager->nextZone();
+    _programManager->nextZone();
     sendOk(_server);
 }
 
 void Router::handleStatus()
 {
-    sendStatus(_server, _zonemanager->getStatus());
+    if (isProgramNumValid())
+    {
+        int program = getProgram();
+        sendStatus(_server, _programManager->getProgramStatus(program));
+        sendOk(_server);
+    }
+    else
+    {
+        sendError(_server, "Bad program");
+    }
 }
 
 void Router::handleSave()
 {
     if (postRequestOk(_server))
     {
-        _zonemanager->loadSettings(receiveSettings(_server));
-        sendOk(_server);
+        if (isProgramNumValid())
+        {
+            int program = getProgram();
+            _programManager->loadProgramSettings(program, receiveSettings(_server));
+            sendOk(_server);
+        }
+        else
+        {
+            sendError(_server, "Bad program");
+        }
     }
     else
     {
@@ -71,12 +111,12 @@ void Router::handleSave()
 
 void Router::handleStart()
 {
-    _zonemanager->startWatering();
+    _programManager->startWatering();
     sendOk(_server);
 }
 
 void Router::handleStop()
 {
-    _zonemanager->stopWatering();
+    _programManager->stopWatering();
     sendOk(_server);
 }
