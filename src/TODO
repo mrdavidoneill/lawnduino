@@ -1,3 +1,11 @@
+Add instance variable useWeatherAdjust
+- if true, getTimeRemaining should use it to set remaining time
+-- NOT to set zones duration
+- Also should include a setting too to set by user?
+- startWatering shouldn't use weatherAdjustRate
+-- Maybe startWatering should change mode to manual and then change back to auto when finished?
+--- weatherAdjustRate should check if in auto mode before being used?
+
 Add method in ZoneManager to use:
     Manual Adjust
 Add API endpoint to adjust manual adjust %
@@ -13,27 +21,5 @@ Add offline file
 	use littleFS
 	Everytime setting is changed via API call, the offline is also changed
 	On restart, the offline file is called to get settings
-
-Change settings to store settings for more than one LawnManager
-Create ProgramManager
-	controls multiple zonemanagers
-	Change zonemanager to not start watering, but to instead change state to "shouldStart"
-	The programManager iterates through zonemanagers, and starts one when it shouldStart.
-		It will then complete and have isStarted() as false"
-		If another zoneManager also has "shouldStart" nothing happens if isWatering()
-			so it waits for the other one to finish
-
-class ZoneManager(int pins[]) {
-public:
-	shouldFinish()
-	shouldStart()
-	startWatering()
-	stopWatering()
-}
-
-class ProgramManager
-	bool _isWatering;
-
-
 
 
