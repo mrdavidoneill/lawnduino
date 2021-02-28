@@ -27,6 +27,8 @@ class TimeManager
   bool isTimeValid(int hours, int mins);
   bool isTimeToSync(int now);
   bool isTimeToIncrement(int now);
+  bool isInterval(int mins);
+  int getTimeInMinutes();
 
 public:
   TimeManager();

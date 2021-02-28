@@ -118,7 +118,21 @@ bool TimeManager::isTimeToIncrement(int now)
 
 bool TimeManager::isTime(int hours, int mins)
 {
+  if (hours == HH_INTERVAL_CODE)
+  {
+    return isInterval(mins);
+  }
   return (_hours == hours) && (_mins == mins);
+}
+
+bool TimeManager::isInterval(int mins)
+{
+  return getTimeInMinutes() % mins == 0;
+}
+
+int TimeManager::getTimeInMinutes()
+{
+  return _hours * 60 + _mins;
 }
 
 int TimeManager::getDaysSinceSunday()
