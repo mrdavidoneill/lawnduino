@@ -15,15 +15,16 @@ void setUp()
 // // clean stuff up here
 // }
 
+// Test getRainAdjust() is 1 at initialisation
 void testRainAdjustInitial()
 {
     rainAdjust = RainAdjust();
     TEST_ASSERT_EQUAL(1, rainAdjust.getRainAdjust());
 }
 
+// Test sumHourlyLog() is equal to hourly log length
 void testSumHourlyLog()
 {
-
     for (int i = 0; i < HOURLY_LOG_LENGTH; i++)
     {
         hourlyLog[i] = 1;
@@ -33,9 +34,9 @@ void testSumHourlyLog()
     TEST_ASSERT_EQUAL(HOURLY_LOG_LENGTH, rainAdjust.sumHourlyLog());
 }
 
+// Test getRainAdjust() at 1 mm all week
 void testSumWeekLog()
 {
-
     for (int i = 0; i < WEEK_LOG_LENGTH; i++)
     {
         weekLog[i] = 1;
@@ -45,6 +46,7 @@ void testSumWeekLog()
     TEST_ASSERT_EQUAL(WEEK_LOG_LENGTH, rainAdjust.sumWeekLog());
 }
 
+// Test getRainAdjust() at 1 mm all week
 void testRainAdjustAtLength()
 {
     for (int i = 0; i < WEEK_LOG_LENGTH; i++)
@@ -57,6 +59,7 @@ void testRainAdjustAtLength()
     TEST_ASSERT_EQUAL(0, rainAdjust.getRainAdjust());
 }
 
+// Test getRainAdjust() at target mm
 void testRainAdjustAtTarget()
 {
     for (int i = 0; i < WEEK_LOG_LENGTH; i++)
@@ -76,6 +79,7 @@ void testRainAdjustAtTarget()
     TEST_ASSERT_EQUAL(0, rainAdjust.getRainAdjust());
 }
 
+// Test getRainAdjust() with no rain
 void testRainAdjustAtNoRain()
 {
     for (int i = 0; i < WEEK_LOG_LENGTH; i++)
