@@ -7,7 +7,7 @@
 #include "Secrets.h"
 #include <ProgramManager.h>
 #include <TimeManager.h>
-#include "Router/Router.h"
+#include <Router.h>
 #include <WiFiUdp.h>
 
 #include <RainAdjust.h>
