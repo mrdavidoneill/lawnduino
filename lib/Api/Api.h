@@ -9,7 +9,7 @@
 #include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
 #include <Config.h>
-#include "Errors.h"
+#include <Errors.h>
 
 const size_t STATUS_CAPACITY = JSON_ARRAY_SIZE(2) + 2 * JSON_ARRAY_SIZE(6) + JSON_OBJECT_SIZE(8);
 const size_t SETTINGS_CAPACITY = JSON_ARRAY_SIZE(NUM_OF_WEEKDAYS) + JSON_ARRAY_SIZE(NUM_OF_ZONES) + JSON_ARRAY_SIZE(NUM_OF_HH_MIN) + JSON_OBJECT_SIZE(4) + 40;
