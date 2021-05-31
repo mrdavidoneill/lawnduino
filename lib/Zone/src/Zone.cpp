@@ -18,6 +18,7 @@ Zone::Zone(int pin)
 
     DEBUG_MSG("and duration %d mins...", (int)(_durationMs / 60 / 1000));
     pinMode(pin, OUTPUT);
+    digitalWrite(pin, HIGH);
     DEBUG_MSG("Pin %d set to OUTPUT\n", pin);
 }
 
@@ -46,7 +47,7 @@ void Zone::turnOn()
     DEBUG_MSG("Turning on pin %d for %d mins...", getPin(), (int)(_durationMs / 60 / 1000));
     setStartTimestamp(millis());
     setEndTimestamp();
-    digitalWrite(_pin, HIGH);
+    digitalWrite(_pin, LOW);
     _isOn = true;
     DEBUG_MSG("...OK\n");
 }
@@ -54,7 +55,7 @@ void Zone::turnOn()
 void Zone::turnOff()
 {
     DEBUG_MSG("Turning off pin %d", _pin);
-    digitalWrite(_pin, LOW);
+    digitalWrite(_pin, HIGH);
     _isOn = false;
     DEBUG_MSG("...OK\n");
 };
