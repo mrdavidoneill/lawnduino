@@ -19,7 +19,7 @@
 #define DEBUG_MSG(...)
 #endif
 
-int PINS[NUM_OF_ZONES] = {2, 3};
+int PINS[NUM_OF_ZONES] = {16, 5, 4, 0, 2, 14};
 
 ESP8266WebServer server(80);
 WiFiUDP ntpUDP;
