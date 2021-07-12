@@ -44,10 +44,18 @@ bool Zone::isFinished()
 
 void Zone::turnOn()
 {
-    DEBUG_MSG("Turning on pin %d for %d mins...", getPin(), (int)(_durationMs / 60 / 1000));
     setStartTimestamp(millis());
     setEndTimestamp();
-    digitalWrite(_pin, LOW);
+
+    if (_durationMs == 0)
+    {
+        DEBUG_MSG("Duration is 0mS, so not turning on valve %d", getPin());
+    }
+    else
+    {
+        DEBUG_MSG("Turning on pin %d for %d mins...", getPin(), (int)(_durationMs / 60 / 1000));
+        digitalWrite(_pin, LOW);
+    }
     _isOn = true;
     DEBUG_MSG("...OK\n");
 }
