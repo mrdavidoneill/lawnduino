@@ -38,7 +38,7 @@ int Router::getProgram()
     {
         program = _server->arg("program").toInt();
     }
-    if (0 > program && program > NUM_OF_PROGRAMS - 1)
+    if (0 > program || program > NUM_OF_PROGRAMS - 1)
     {
         program = -1; // Bad program
     }
@@ -47,13 +47,20 @@ int Router::getProgram()
 
 void Router::begin()
 {
-    _server->on(AUTO, [=]() { Router::handleAuto(); });
-    _server->on(MANUAL, [=]() { Router::handleManual(); });
-    _server->on(NEXT, [=]() { Router::handleNext(); });
-    _server->on(SAVE, [=]() { Router::handleSave(); });
-    _server->on(START, [=]() { Router::handleStart(); });
-    _server->on(STATUS, [=]() { Router::handleStatus(); });
-    _server->on(STOP, [=]() { Router::handleStop(); });
+    _server->on(AUTO, [=]()
+                { Router::handleAuto(); });
+    _server->on(MANUAL, [=]()
+                { Router::handleManual(); });
+    _server->on(NEXT, [=]()
+                { Router::handleNext(); });
+    _server->on(SAVE, [=]()
+                { Router::handleSave(); });
+    _server->on(START, [=]()
+                { Router::handleStart(); });
+    _server->on(STATUS, [=]()
+                { Router::handleStatus(); });
+    _server->on(STOP, [=]()
+                { Router::handleStop(); });
 }
 
 void Router::handleAuto()
