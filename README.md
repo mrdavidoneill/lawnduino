@@ -1,4 +1,13 @@
-# SETUP
+# Lawn Manager
+
+Control your irrigation system with ESP8266
+
+- Adjusts watering rate according to time of year and recent rainfall
+- Uses a HTTP server to take user input and send current status
+- 2 modes for either starting at a daily time or at a regular interval
+
+![ESP8266 controller](https://mrdavidoneill.com/images/lawnmanager001.png)
+![Home assistant control](https://mrdavidoneill.com/images/lawnmanager002.png)
 
 ## Set number of zones to control:
 
